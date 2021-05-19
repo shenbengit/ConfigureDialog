@@ -93,8 +93,8 @@ class ConfigureDialog private constructor(builder: Builder) :
         /**
          * 服务器ip地址
          */
-        internal var originalIp: String = ""
-        fun setOriginalIp(ip: String) = apply { originalIp = ip }
+        internal var originalIp: String? = null
+        fun setOriginalIp(ip: String?) = apply { originalIp = ip }
 
         /**
          * 服务器端口号
@@ -106,8 +106,8 @@ class ConfigureDialog private constructor(builder: Builder) :
         /**
          * 所编号
          */
-        internal var originalPrisonId: String = ""
-        fun setOriginalPrisonId(prisonId: String) = apply { originalPrisonId = prisonId }
+        internal var originalPrisonId: String? = null
+        fun setOriginalPrisonId(prisonId: String?) = apply { originalPrisonId = prisonId }
 
         /**
          * 参数配置回调
