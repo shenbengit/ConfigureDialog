@@ -18,8 +18,15 @@ class ConfigureDialog private constructor(builder: Builder) :
     Dialog(builder.context, builder.themeResId) {
 
     companion object {
+        /**
+         * ip正则
+         */
         private const val IP_REGEX =
             "(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)"
+
+        /**
+         * 合法端口号范围
+         */
         private val PORT_RANGE = 0..65535
 
         @JvmStatic
