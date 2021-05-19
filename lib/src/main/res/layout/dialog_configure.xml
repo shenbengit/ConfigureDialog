@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="340dp"
+    android:layout_height="200dp"
+    android:background="@drawable/ic_blue_rounded_dialog_bg"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:text="参数配置"
+        android:textColor="#ffffff"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/tvIpHint"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvIpHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="IP"
+        android:textColor="#ffffff"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@id/tvPortHint"
+        app:layout_constraintStart_toStartOf="@id/tvTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+    <EditText
+        android:id="@+id/etIp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/ic_input_bg"
+        android:hint="请输入IP地址"
+        android:inputType="text"
+        android:paddingStart="3dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="3dp"
+        android:paddingBottom="5dp"
+        android:singleLine="true"
+        android:textColor="#ffffff"
+        android:textColorHint="#D3D3D3"
+        android:textCursorDrawable="@null"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/tvIpHint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvTitle"
+        app:layout_constraintTop_toTopOf="@id/tvIpHint" />
+
+    <TextView
+        android:id="@+id/tvPortHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PORT"
+        android:textColor="#ffffff"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@id/tvPrisonHint"
+        app:layout_constraintStart_toStartOf="@id/tvTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvIpHint" />
+
+    <EditText
+        android:id="@+id/etPort"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/ic_input_bg"
+        android:hint="请输入端口号"
+        android:inputType="number"
+        android:paddingStart="3dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="3dp"
+        android:paddingBottom="5dp"
+        android:singleLine="true"
+        android:textColor="#ffffff"
+        android:textColorHint="#D3D3D3"
+        android:textCursorDrawable="@null"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/tvPortHint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvTitle"
+        app:layout_constraintTop_toTopOf="@id/tvPortHint" />
+
+    <TextView
+        android:id="@+id/tvPrisonHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="所编号"
+        android:textColor="#ffffff"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@id/tvSure"
+        app:layout_constraintStart_toStartOf="@id/tvTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvPortHint" />
+
+    <EditText
+        android:id="@+id/etPrisonId"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/ic_input_bg"
+        android:hint="请输入所编号"
+        android:inputType="number"
+        android:paddingStart="3dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="3dp"
+        android:paddingBottom="5dp"
+        android:singleLine="true"
+        android:textColor="#ffffff"
+        android:textColorHint="#D3D3D3"
+        android:textCursorDrawable="@null"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/tvPrisonHint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvTitle"
+        app:layout_constraintTop_toTopOf="@id/tvPrisonHint" />
+
+    <TextView
+        android:id="@+id/tvSure"
+        android:layout_width="70dp"
+        android:layout_height="25dp"
+        android:background="@drawable/ic_sure_btn_bg"
+        android:gravity="center"
+        android:text="确认"
+        android:textColor="#2c8cf0"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tvCancel"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="@id/tvTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvPrisonHint" />
+
+    <TextView
+        android:id="@+id/tvCancel"
+        android:layout_width="70dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/ic_input_bg"
+        android:gravity="center"
+        android:text="取消"
+        android:textColor="#ffffff"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/tvSure"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvSure"
+        app:layout_constraintTop_toTopOf="@id/tvSure" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
