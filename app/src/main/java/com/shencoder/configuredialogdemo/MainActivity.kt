@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import com.shencoder.configuredialog.ConfigureDialog
+import com.shencoder.configuredialog.GetCorrectPassword
 import com.shencoder.configuredialog.PasswordDialog
 
 class MainActivity : AppCompatActivity() {
@@ -14,12 +15,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val passwordDialog by lazy {
-        PasswordDialog.builder(this)
-            .setCorrectPassword("123456")
-            .setOnPasswordCorrectCallback {
-                Log.i(TAG, "密码输入正确")
-                Toast.makeText(this, "密码输入正确", Toast.LENGTH_SHORT).show()
-            }
+        PasswordDialog.builder(this) { "123" }
+            .setOnPasswordCorrectCallback(correct = {
+                //do something
+            }, wrong = {
+                //do something
+                false
+            })
             .create()
     }
     private val configureDialog by lazy {

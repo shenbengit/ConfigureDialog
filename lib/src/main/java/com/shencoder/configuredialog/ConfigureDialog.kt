@@ -2,6 +2,7 @@ package com.shencoder.configuredialog
 
 import android.app.Dialog
 import android.content.Context
+import android.os.Bundle
 import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.IntRange
@@ -14,7 +15,7 @@ import androidx.annotation.StyleRes
  * @date    2021/04/23 10:55
  * @email   714081644@qq.com
  */
-class ConfigureDialog private constructor(builder: Builder) :
+class ConfigureDialog private constructor(private val builder: Builder) :
     Dialog(builder.context, builder.themeResId) {
 
     companion object {
@@ -36,12 +37,13 @@ class ConfigureDialog private constructor(builder: Builder) :
         fun builder(context: Context, @StyleRes themeResId: Int) = Builder(context, themeResId)
     }
 
-    private val etIp: EditText
-    private val etPort: EditText
-    private val etPrisonId: EditText
+    private lateinit var etIp: EditText
+    private lateinit var etPort: EditText
+    private lateinit var etPrisonId: EditText
 
 
-    init {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.dialog_configure)
         setCancelable(false)
         setCanceledOnTouchOutside(false)
@@ -80,7 +82,6 @@ class ConfigureDialog private constructor(builder: Builder) :
         etPort.setText(port)
         etPrisonId.setText(builder.originalPrisonId)
     }
-
 
     class Builder @JvmOverloads internal constructor(
         internal val context: Context,

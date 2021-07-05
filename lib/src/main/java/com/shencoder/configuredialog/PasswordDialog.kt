@@ -2,6 +2,8 @@ package com.shencoder.configuredialog
 
 import android.app.Dialog
 import android.content.Context
+import android.os.Bundle
+import android.text.TextUtils
 import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.StyleRes
@@ -14,20 +16,27 @@ import androidx.annotation.StyleRes
  */
 
 class PasswordDialog private constructor(
-    builder: Builder
+    private val builder: Builder
 ) : Dialog(builder.context, builder.themeResId) {
-    private val etPassword: EditText
 
     companion object {
 
         @JvmStatic
-        fun builder(context: Context) = Builder(context)
+        fun builder(context: Context, correctPassword: GetCorrectPassword) =
+            Builder(context, correctPassword)
 
         @JvmStatic
-        fun builder(context: Context, @StyleRes themeResId: Int) = Builder(context, themeResId)
+        fun builder(context: Context, correctPassword: () -> String) =
+            builder(context, object : GetCorrectPassword {
+                override val correctPassword: String
+                    get() = correctPassword()
+            })
     }
 
-    init {
+    private lateinit var etPassword: EditText
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.dialog_password)
         setCancelable(false)
         setCanceledOnTouchOutside(false)
@@ -39,29 +48,33 @@ class PasswordDialog private constructor(
                 context.toast("请输入密码")
                 return@setOnClickListener
             }
-            if (str != builder.mCorrectPassword) {
-                context.toast("密码错误")
+            val onPasswordCorrectCallback = builder.onPasswordCorrectCallback
+
+            if (TextUtils.equals(str, builder.correctPassword.correctPassword).not()) {
+                if (onPasswordCorrectCallback != null && onPasswordCorrectCallback.onPasswordWrong()) {
+                    cancel()
+                } else {
+                    context.toast("密码错误！")
+                }
                 return@setOnClickListener
             }
             cancel()
-            builder.onPasswordCorrectCallback?.onPasswordCorrect()
+            onPasswordCorrectCallback?.onPasswordCorrect()
         }
     }
 
-    override fun show() {
+    override fun onStop() {
+        super.onStop()
         etPassword.text = null
-        super.show()
     }
 
-    class Builder @JvmOverloads internal constructor(
+    class Builder internal constructor(
         internal val context: Context,
-        @StyleRes internal val themeResId: Int = R.style.ConfigureDialog
+        internal val correctPassword: GetCorrectPassword
     ) {
-        /**
-         * 设置正确的密码
-         */
-        internal var mCorrectPassword: String = ""
-        fun setCorrectPassword(password: String) = apply { mCorrectPassword = password }
+        @StyleRes
+        internal var themeResId: Int = R.style.ConfigureDialog
+        fun setThemeResId(@StyleRes themeResId: Int) = apply { this.themeResId = themeResId }
 
         /**
          * 密码输入正确后回调
@@ -71,10 +84,18 @@ class PasswordDialog private constructor(
             onPasswordCorrectCallback = callback
         }
 
-        inline fun setOnPasswordCorrectCallback(crossinline callback: () -> Unit = {}) =
+        inline fun setOnPasswordCorrectCallback(
+            crossinline correct: () -> Unit = {},
+            crossinline wrong: () -> Boolean = { false }
+        ) =
             setOnPasswordCorrectCallback(object : OnPasswordCorrectCallback {
+
+                override fun onPasswordWrong(): Boolean {
+                    return wrong()
+                }
+
                 override fun onPasswordCorrect() {
-                    callback.invoke()
+                    correct()
                 }
             })
 

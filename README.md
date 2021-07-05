@@ -24,19 +24,21 @@ dependencies {
 
 ```kotlin
 // 创建自定义LoadingDialog
-val passwordDialog = PasswordDialog.builder(this)
-            .setCorrectPassword("123456")
-            .setOnPasswordCorrectCallback {
-                Log.i(TAG, "密码输入正确")
-            }
-            .create()
+val passwordDialog = PasswordDialog.builder(this) { "123" }
+                         .setOnPasswordCorrectCallback(correct = {
+                             //do something
+                         }, wrong = {
+                             //do something
+                             true
+                         })
+                         .create()
 
 val configureDialog = ConfigureDialog.builder(this)
             .setOriginalIp("192.168.2.2")
-            .setOriginalPort(12)
+            .setOriginalPort(12)//default : ConfigureDialog.Builder.DEFAULT_PORT
             .setOriginalPrisonId("123123")
             .setOnConfigureCallback { ip, port, prisonId ->
-                Log.i(TAG, "参数配置，ip：${ip}，port：${port}，prisonId：${prisonId} ")
+                //do something
             }
             .create()
             
