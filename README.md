@@ -25,13 +25,13 @@ dependencies {
 ```kotlin
 // 创建自定义LoadingDialog
 val passwordDialog = PasswordDialog.builder(this) { "123" }
-                         .setOnPasswordCorrectCallback(correct = {
-                             //do something
-                         }, wrong = {
-                             //do something
-                             true
-                         })
-                         .create()
+            .setOnPasswordCorrectCallback(correct = {
+                //do something
+            }, wrong = {
+                //do something
+                false
+            })
+            .create()
 
 val configureDialog = ConfigureDialog.builder(this)
             .setOriginalIp("192.168.2.2")
